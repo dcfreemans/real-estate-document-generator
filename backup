@@ -1,0 +1,244 @@
+<?php
+require('fpdf.php');
+require('../includes/db.php');
+
+$pdf = new FPDF('P','mm','A4');
+$pdf->AddPage();
+
+
+if(isset($_GET['id'])) {
+    $id = $_GET['id']; 
+}
+$get_four = "select * from files where id='$id'";
+$run_top = mysqli_query($con,$get_four);
+while($row = mysqli_fetch_array($run_top)){
+$id = $row['id'];
+$seller = $row['seller'];
+$buyer = $row['buyer'];
+$plot = $row['plot'];
+$gabas = $row['gabas'];
+$yamma = $row['yamma'];
+$kudu = $row['kudu'];
+$arewa = $row['arewa'];
+$sellerw1 = $row['sellerw1'];
+$sellerw2 = $row['sellerw2'];
+$sellerw3 = $row['sellerw3'];
+$buyerw1 = $row['buyerw1'];
+$buyerw2 = $row['buyerw2'];
+$buyerw3 = $row['buyerw3'];
+$amount = $row['amount'];
+$location = $row['location'];
+$date = $row['date'];
+$pdf->Image('../IMG/courtofarm.png',90,0,30);
+$pdf->Image('../IMG/logoarewa.png',8,14,30);
+$pdf->Image('../IMG/logoarewa.png',173,14,30,20);
+$pdf->setXY(35,8);
+$pdf->SetFont('Arial','B',15);
+$pdf->Cell(80,26, 'OFFICE OF THE VILLAGE HEAD AUJARAWAR ALKALI');
+$pdf->setXY(35,8);
+$pdf->SetFont('Arial','B',15);
+$pdf->Cell(80,40, 'GEZAWA LOCAL GOVERNMENT AREA, KANO,NIGERIA');
+$pdf->setXY(66,16);
+$pdf->SetFont('Arial','I',10);
+$pdf->Cell(150,37, 'PHONE - 07035211115, 08166655158, 08166655158');
+$pdf->setXY(66,16);
+$pdf->SetFont('Arial','I',10);
+$pdf->Cell(150,44, 'EMAIL - Ahmadyakubu1111@gmail.com');
+
+$pdf->setXY(66,16);
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(150,60, 'TAKARDAR CINIKIN FILI,GONA,GIDA,KANGO',10);
+
+$pdf->setXY(66,16);
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(150,67, 'SALES AGREEMENT OF PLOT,HOUSE,FARM');
+
+$pdf->setXY(171,16);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,67,'S/N :');
+
+$pdf->setXY(180,16);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,67,$id);
+
+// $pdf->setXY(160,10);
+// $pdf->Image('../IMG/pass.jpeg',20,34,30,30);
+
+$pdf->SetY(60);
+$pdf->SetFont('Arial','B',16);
+$pdf->Cell(18,15,'Date : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',14);
+$pdf->Cell(10,15,$date,0,1,'L',false);
+
+$pdf->SetY(70);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(10,10,'NI AHMAD YAKUBU AHMAD DAGACIN AUJARAWAR ALKALIN GEZAWA LGA NA SHAIDA KUMA NA TABBATAR',0,0,'L',false);
+
+$pdf->SetY(73);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(10,10,'I Alh Ahmad Yakubu Ahmad Village Head of Aujarawar Alkali Gezawa LGA Witness the Sales Agreement',0,0,'L',false);
+
+$pdf->SetY(80);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(30,10,'CEWAR Alh/Mal :',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',14);
+$pdf->Cell(10,10,$seller,0,1,'L',false);
+
+$pdf->SetY(84);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(48,10,'that Alh/Mr/Mrs',0,0,'L',false);
+
+$pdf->SetY(90);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(35,10,'Ya Siyarwa Alh/Mal :',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',14);
+$pdf->Cell(10,10,$buyer,0,1,'L',false);
+
+$pdf->SetY(94);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(48,10,'sell to Alh/Mr/Mrs',0,0,'L',false);
+
+$pdf->SetY(105);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(14,10,'Gabas : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(40,10,$gabas,0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(17,10,'Yamma : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(40,10,$yamma,0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(14,10,'Kudu : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(40,10,$kudu,0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(14,10,'Arewa : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',10);
+$pdf->Cell(10,10,$arewa,0,0,'L',false);
+
+$pdf->SetY(117);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(25,10,'Akan Kudi : N',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',14);
+$pdf->Cell(10,10,$amount,0,1,'L',false);
+
+$pdf->SetY(120);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(48,10,'For the sum of',0,0,'L',false);
+
+$pdf->SetY(127);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(18,10,'Unguwa : ',0,0,'L',false);
+
+$pdf->SetFont('Arial','U',14);
+$pdf->Cell(10,10,$location,0,1,'L',false);
+
+$pdf->SetY(130);
+$pdf->SetFont('Arial','',8);
+$pdf->Cell(48,10,'situated at',0,0,'L',false);
+
+$pdf->SetY(140);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(150,10,'Shaidun Mai Siyarwa / Sellers Witness ',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(17,10,'Sa Hannu / Signature ',0,0,'L',false);
+
+$pdf->SetY(150);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$sellerw1,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'1._____________',0,0,'L',false);
+
+$pdf->SetY(160);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$sellerw2,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'2._____________',0,0,'L',false);
+
+$pdf->SetY(170);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$sellerw3,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'3._____________',0,0,'L',false);
+
+
+$pdf->SetY(180);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(150,10,'Shaidun Mai Siye / Buyers Witness ',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(17,10,'Sa Hannu / Signature ',0,0,'L',false);
+
+$pdf->SetY(190);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$buyerw1,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'1._____________',0,0,'L',false);
+
+$pdf->SetY(200);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$buyerw2,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'2._____________',0,0,'L',false);
+
+$pdf->SetY(210);
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(150,10,$buyerw3,0,0,'L',false);
+
+$pdf->SetFont('Arial','',10);
+$pdf->Cell(17,10,'3._____________',0,0,'L',false);
+
+$pdf->SetY(225);
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(125,10,'Sa Hannun Mai Siyarwa / Sellers Signature ',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(17,10,'Sa Hannun Mai Saye / Buyers Signature ',0,0,'L',false);
+
+$pdf->SetY(240);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(125,10,'________________________________',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(17,10,'_________________________________',0,0,'L',false);
+
+$pdf->SetY(255);
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(125,10,'Sa Hannun Mai Unguwa / Ward head Signature ',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',8);
+$pdf->Cell(17,10,'Sa Hannun Mai Dagaci / Village head Signature ',0,0,'L',false);
+
+$pdf->SetY(248);
+$pdf->SetFont('Arial','I',7);
+$pdf->Cell(125,10,'Anyi Wannan Cinikin Da Sharadin Mai Saye Bazai Gina Coci ba, Gidan Mata, Gidan Giya da Makamantansu.',0,0,'L',false);
+
+$pdf->SetY(265);
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(125,10,'________________________________',0,0,'L',false);
+
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(17,10,'_________________________________',0,0,'L',false);
+
+
+
+$pdf->Output();
+}
+?>
